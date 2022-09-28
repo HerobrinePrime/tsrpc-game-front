@@ -22,9 +22,9 @@ const connect = async (client: WsClient<ServiceType>): Promise<number> => {
     return 1
 }
 
-const join = async (client: WsClient<ServiceType>): Promise<number> => {
+const join = async (client: WsClient<ServiceType>): Promise<string> => {
     const a = await client.callApi('Join', {})
-    return a.res?.playerId as number
+    return a.res?.playerId as string
 }
 
 export {

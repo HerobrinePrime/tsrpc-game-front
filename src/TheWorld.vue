@@ -74,7 +74,7 @@ import keyActions from "./hooks/keyActions";
 import { getClient, connect, join } from "./hooks/clientHandler";
 
 const client = getClient();
-const playerId = ref(-1);
+const playerId = ref('');
 const players = reactive(new Array<any>)
 
 const foxRef = ref();
@@ -96,13 +96,29 @@ onMounted(() => {
   inti();
   client.listenMsg("Sync", (call) => {
     console.log(call.players);
-    call.players.forEach((ele: any,index:number)=> {
+    // call.players.forEach((ele: any,index:number)=> {
       
-      // if(ele.playerId == playerId.value) return
-      if(!players[index]) return players.push(ele)
-      players[index] = ele
-    });
-    
+    //   // if(ele.playerId == playerId.value) return
+    //   if(!players[index]) return players.push(ele)
+    //   players[index] = ele
+    // });
+    call.players.forEach(playerState =>{
+      const thePlayer =  players.find(renderedPlayer => renderedPlayer.playerId === playerState.playerId)
+      //加入players
+      if(!thePlayer){
+        players.push(playerState)
+      }
+      //已有更新
+      else{
+        Object.assign(thePlayer,playerState)
+      }
+    })
+
+    players.forEach((renderedPlayer,index,array) =>{
+      if(call.players.findIndex(playerState => renderedPlayer.playerId === playerState.playerId) === -1){
+        array.splice(index,1)
+      }
+    })
   });
 });
 

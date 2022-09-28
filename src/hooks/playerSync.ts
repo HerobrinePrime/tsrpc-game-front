@@ -3,7 +3,7 @@ import { WsClient } from 'tsrpc-browser';
 import { useLoop } from 'lingo3d-vue'
 import { Ref, watchEffect } from 'vue'
 
-export default (playerId: number, foxRef: Ref, client: WsClient<ServiceType>) => {
+export default (playerId: string, foxRef: Ref, client: WsClient<ServiceType>) => {
 
     const sync = useLoop(() => {
         const fox = foxRef.value
