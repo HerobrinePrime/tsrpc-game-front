@@ -3,8 +3,8 @@ import { serviceProto, ServiceType } from "../shared/protocols/serviceProto";
 
 const getClient = (): WsClient<ServiceType> => {
     const client = new WsClient(serviceProto, {
-        // server: "ws://150.158.27.47:3000",
-        server: "ws://127.0.0.1:3000",
+        server: "ws://150.158.27.47:3000",
+        // server: "ws://127.0.0.1:3000",
         json: true,
         // logger: console
     })

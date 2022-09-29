@@ -19,21 +19,20 @@
       :fov="fov"
     >
     <!--  strideMode="aim | free" -->
-    <Dummy
-      ref="foxRef"
-      src="/models/Fox.fbx"
-      :animations="{
-        idle: '/models/Idle.fbx',
-        running: '/models/Walking.fbx',
-      }"
-      :y="-968.56"
-      :strideMove="true"
-      strideMode="free"
-      
-      physics="character"
-      :metalnessFactor="-5"
-    >
-    
+      <Dummy
+        ref="foxRef"
+        src="/models/Fox.fbx"
+        :animations="{
+          idle: '/models/Idle.fbx',
+          running: '/models/Walking.fbx',
+        }"
+        :y="-968.56"
+        :strideMove="true"
+        strideMode="free"
+        
+        physics="character"
+        :metalnessFactor="-5"
+      >
     </Dummy>
     </ThirdPersonCamera>
 
