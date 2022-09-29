@@ -4,10 +4,11 @@
     <Model :scale="300" src="/models/Grassland.glb" physics="map" name="map">
       <Find name="road" physics="map"></Find>
     </Model>
-
+    <!-- mouseControl="drag" -->
+    <!-- lockTargetRotation="dynamic-lock" -->
     <ThirdPersonCamera
       active
-      mouseControl="drag"
+      mouseControl
       lockTargetRotation="dynamic-lock"
       enableDamping
       :inner-x="65"
@@ -17,21 +18,28 @@
       :inner-rotation-y="3.5"
       :fov="fov"
     >
-      <Dummy
-        ref="foxRef"
-        src="/models/Fox.fbx"
-        :animations="{
-          idle: '/models/Idle.fbx',
-          running: '/models/Walking.fbx',
-        }"
-        :y="-968.56"
-        strideMode="free"
-        strideMove
-        physics="character"
-        :metalnessFactor="-5"
-      />
+    <!--  strideMode="aim | free" -->
+    <Dummy
+      ref="foxRef"
+      src="/models/Fox.fbx"
+      :animations="{
+        idle: '/models/Idle.fbx',
+        running: '/models/Walking.fbx',
+      }"
+      :y="-968.56"
+      :strideMove="true"
+      strideMode="free"
+      
+      physics="character"
+      :metalnessFactor="-5"
+    >
+    
+    </Dummy>
     </ThirdPersonCamera>
 
+    <!-- :rotation-x="player.rotationX"
+      :rotation-y="player.rotationY"
+      :rotation-z="player.rotationZ" -->
     <Dummy
       src="/models/Fox.fbx"
       :animations="{
@@ -42,8 +50,8 @@
       :x="player.x"
       :y="player.y"
       :z="player.z"
+      :rotation-y="test(player)"
       :rotation-x="player.rotationX"
-      :rotation-y="player.rotationY"
       :rotation-z="player.rotationZ"
       physics="character"
       :metalnessFactor="-5"
@@ -54,7 +62,7 @@
     <Setup skybox="/env/dreifaltigkeitsberg_4k.hdr" />
     <LingoEditor v-if="editorOn" />
   </World>
-  
+
   <a class="btn" href="javascript:void(0);" @click.prevent="editorOn = !editorOn">editorOn</a>
 </template>
 
@@ -75,6 +83,11 @@ import playerSync from "./hooks/playerSync";
 import keyActions from "./hooks/keyActions";
 import { getClient, connect, join } from "./hooks/clientHandler";
 import joyDisplayController from "./hooks/joyDisplayController"
+
+const test = (player: any)=>{
+  console.log(player,player.rotationX);
+  return player.rotationY
+}
 
 const client = getClient();
 const playerId = ref("");

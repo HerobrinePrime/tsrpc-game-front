@@ -9,6 +9,8 @@ export default (playerId: string, foxRef: Ref, client: WsClient<ServiceType>) =>
         const fox = foxRef.value
         if (!fox) return
         // console.log(fox.x, fox.y, fox.z, fox.animation, fox.rotationX, fox.rotationY, fox.rotationZ);
+        console.log( fox.rotationX, fox.rotationY, fox.rotationZ);
+        // console.log(fox)
         client.sendMsg('UpdateStatus', {
             playerId,
             x: fox.x,
